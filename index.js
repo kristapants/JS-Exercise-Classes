@@ -148,6 +148,14 @@ class Instructor extends Lambdasian {
   grade(student, subject) {
     return `${student.name} recieves a perfect score on ${subject}`;
   }
+  stretchGrade(student) {
+    const coinflip = Math.floor(Math.random() * 3 - 1); //returns a value 1 or 2
+    if (coinflip === 1) {
+      student.grade += Math.floor(Math.random() * 101 - 1 );
+    } else {
+      student.grade -= Math.floor(Math.random() * 101 - 1 );
+    }
+  }
 }
 
 /*
@@ -171,6 +179,7 @@ class Student extends Lambdasian {
     this.previousBackground = attrs.previousBackground;
     this.className = attrs.className;
     this.favSubjects = attrs.favSubjects;
+    this.grade = attrs.grade;
   }
   listSubjects() {
     return `Loving ${this.favSubjects.join(", ")}!`;
@@ -181,7 +190,15 @@ class Student extends Lambdasian {
   sprintChallenge(subject) {
     return `${this.name} has begun sprint challenge on ${subject}`;
   }
+  graduate() {
+    if (this.grade >= 70) {
+      return `Congrats ${this.name}! You've graduated and are ready for a job in ${this.favSubjects.join(", ")}`;
+    } else {
+      return `Get back at it, ${this.name}! You've got more time to spend with ${this.className}, unless you want to go back to ${this.previousBackground}.`
+    }
+  }
 }
+
 
 /*
   TASK 6
@@ -206,9 +223,45 @@ class ProjectManager extends Instructor {
     return `${this.name} announces to ${channel}, @${channel} standy times!`;
   }
   debugsCode(student, subject) {
-    return `${this.name} debugs ${student.name}'s code on ${subject}`
+    return `${this.name} debugs ${student.name}'s code on ${subject}`;
   }
 }
+
+
+
+const studentOne = new Student({
+  name: "Krorsta", 
+  age: 33, 
+  location: "Madison", 
+  previousBackground: "project management",
+  className: "Web35",
+  favSubjects: ["JavaScript", "CSS", "data science", "design"],
+  grade: 50,
+});
+
+const teacherOne = new Instructor ({
+  name: "The Dean", 
+  age: 33, 
+  location: "Madison", 
+  specialty: "Linting",
+  favLanguage: ".Net",
+  catchPhrase: "YaaaaOWZA",
+})
+console.log(teacherOne.stretchGrade(studentOne));
+console.log(studentOne.grade);
+console.log(teacherOne.stretchGrade(studentOne));
+console.log(studentOne.grade);
+console.log(teacherOne.stretchGrade(studentOne));
+console.log(studentOne.grade);
+console.log(teacherOne.stretchGrade(studentOne));
+console.log(studentOne.grade);
+console.log(teacherOne.stretchGrade(studentOne));
+console.log(studentOne.grade);
+console.log(teacherOne.stretchGrade(studentOne));
+console.log(studentOne.grade);
+console.log(teacherOne.stretchGrade(studentOne));
+console.log(studentOne.grade);
+console.log(studentOne.graduate())
 
 /*
   STRETCH PROBLEM (no tests!)
